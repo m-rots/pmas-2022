@@ -24,6 +24,19 @@ brew tap m-rots/project-mas
 brew install redis thunderstruck
 ```
 
+To start Redis on boot, you can enable the Redis service:
+
+```
+brew services start redis
+```
+
+Once you're no longer following this course. You can disable and remove these dependencies by running:
+
+```
+brew services stop redis
+brew rm redis thunderstruck
+```
+
 ### Docker
 
 Students running Windows (55% in 2022) or Linux (1% in 2022) can install Redis and Thunderstruck through [Docker](https://www.docker.com/get-started).
@@ -34,6 +47,15 @@ docker-compose up -d
 ```
 
 This command will create and run two services in the background: Redis and Thunderstruck.
+
+You can also manually start Redis by running:
+
+```
+docker run -d -p=6379:6379 \
+    --restart=unless-stopped \
+    --name=sic \
+    redis:alpine
+```
 
 _Note: currently the Docker Compose template only starts the Redis service. Thunderstruck does not (yet) offer a Docker image._
 
@@ -50,6 +72,8 @@ brew services start redis
 
 Furthermore, removing TLS would further reduce the Redis configuration file complexity.
 In fact, by removing TLS, there is no need for a config file at all.
+
+_Note: A custom connector build resolved this issue. Within GOAL, it is now possible to set the `notls` environment value to disable SSL/TLS._
 
 ### Remove SIC/Redis
 

@@ -5,13 +5,3 @@ services:
     restart: unless-stopped
     ports:
       - "6379:6379"
-    volumes:
-      - "./private.pem:/tls/private.pem:ro"
-    command:
-      - "redis-server"
-      - "--port 0"
-      - "--tls-port 6379"
-      - "--tls-cert-file /tls/private.pem"
-      - "--tls-key-file /tls/private.pem"
-      - "--tls-ca-cert-file /tls/private.pem"
-      - "--tls-auth-clients no"

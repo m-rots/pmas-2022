@@ -1,6 +1,7 @@
 use 'cbsr-eis-connector.jar' as environment with
 	devices=["thunderstruck:browser"],
-	server='127.0.0.1'.
+	server='127.0.0.1',
+	notls='1'.
 		
 define dialogmngr as agent {
 	use dialog_init as init.
