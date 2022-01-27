@@ -25,8 +25,8 @@ text(recipeInquiry, "What would you like to cook?").
 
 text(recipeChoiceReceipt, Text) :-
 	currentRecipe(Recipe),
-	shorthandName(RecipeName, Recipe),
-	format(string(Text), "~w is an amazing choice!", [RecipeName]).
+	recipeName(Recipe, Name),
+	format(string(Text), "~w is an amazing choice!", [Name]).
 	
 text(recipeChoiceReceipt, Text) :-
 	currentRecipe(Recipe),
@@ -42,16 +42,6 @@ text(wellWish, "I hope you have an absolutely amazing day you wonderful human be
 %%% Scripted text and phrases for ** DOMAIN SPECIFIC ** intents (sorted on intent name)	%%%
 %%% Text is only provided for those intents that the agent will generate (use). 	%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Intent: detail request recipe quantity 
-% This intent is used for slot filling for the user intent: requestRecipeQuantity
-% requestRecipeQuantity has two entities: recipe and ingredient (check your Dialogflow agent)
-
-% Intent: final step (of a recipe)
-text(finalStep, Text) :-
-	currentRecipe(Recipe),
-	finalStep(Recipe, _, Step),
-	format(string(Text), "Yo this is the final step: ~w", [Step]).
 
 % Intent: grant recipe quantity
 % This intent is used for answering the user intent: requestRecipeQuantity.
@@ -74,8 +64,9 @@ text(finalStep, Text) :-
 % 	given recipes/1 predicate.
 	
 % Intent: recipe confirm
-text(recipeConfirm, Txt) :- currentRecipe(Recipe), 
-	string_concat("I will now guide you through the process of making ", Recipe, Txt).
+text(recipeConfirm, Text) :-
+	currentRecipe(Recipe), recipeName(Recipe, Name), 
+	string_concat("I will now guide you through the process of making ", Name, Text).
 		
 % Intent: recipe step
 % This intent is used as part of a repeated subpattern and therefore uses the stepCounter/1

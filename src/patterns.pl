@@ -44,7 +44,7 @@ slotFill(requestRecipeQuantity, a24detailRequest).
 % Pattern A3.0: Extended Telling (Agent; Recipe variant)
 % Steps in the 'story' are determined by the recipe; each separate step is treated as a sub-pattern
 % that is repeated using the 'repeat' agenda management instruction. 
-pattern([a30recipe, [agent, recipeConfirm], [agent, repeat(a30recipeStep)], [agent, finalStep]]).
+pattern([a30recipe, [agent, recipeConfirm], [agent, repeat(a30recipeStep)]]).
 pattern([a30recipeStep, [agent, recipeStep], [user, recipeContinuer]]).
 
 %%% A5 Patterns: Inquiry (Agent)

@@ -10,6 +10,10 @@ html(greeting, Html) :-
 	format(string(Greeting), "Sup, I'm ~w, your handsome chef", [AgentName]),
 	image("/images/squidward.gif", 500, 500, Image),
 	textWithGif(Greeting, Image, Html).
+	
+html(recipeStep, Html) :-
+	currentRecipe(Recipe), stepCounter(Step), totalSteps(Total), step(Recipe, Step, Instruction),
+	format(string(Html), '<div class="recipe-step"><h3>Step ~w/~w</h3><p>~w</p></div>', [Step, Total, Instruction]).
 
 % When there is no specific page for this Intent,
 % then we simply show a page containing the TTS content.
