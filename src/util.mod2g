@@ -1,0 +1,34 @@
+use dialogue as knowledge.
+use patterns as knowledge.
+
+order=linearall.
+
+module util(Action) {
+	if bel(Action = init(SkippedPatterns)) then {
+		forall bel(memory(Memory)) do delete(memory(Memory)).
+		forall bel(session(Session)) do delete(session(Session)).
+		forall bel(agenda(Agenda)) do delete(agenda(Agenda)).
+		forall bel(missingSlots(X)) do delete(missingSlots(X)).
+		
+		forall bel(stepCounter(X)) do delete(stepCounter(X)).
+		forall bel(totalSteps(X)) do delete(totalSteps(X)).
+		
+		forall bel(agentName(X)) do delete(agentName(X)).
+		
+		if bel(lastTopicCheck) then delete(lastTopicCheck).
+		
+		if bel(Agenda = [greeting, a50recipeName, a30recipe], subtract(Agenda, SkippedPatterns, ReducedAgenda)) then
+			% Agenda (list of patterns)
+			insert(agenda(ReducedAgenda)) +
+			% Session history (initialized to a list of one empty sequence).
+			insert(session([ [] ])) +
+			% Memory (should be initially empty but to get our given agent started it is not).
+			insert(memory([])) +
+			% Initialize missingSlots/1. See dialogue.pl for more info.
+			insert(missingSlots([])) +
+			% Initialize stepCounter/1 and totalSteps/1. See dialogue.pl for more info.
+			insert(stepCounter(-1), totalSteps(0)) +
+			insert(agentName("Handsome Squidward")) + 
+			insert(lastTopicCheck).
+	}
+}

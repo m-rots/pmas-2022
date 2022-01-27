@@ -4,8 +4,10 @@ use cooking as knowledge.
 use recipes as knowledge.
 use text as knowledge.
 use html as knowledge.
+
 use dialogflow as actionspec.
 use updateSession as module.
+use util as module.
 
 % This module is the agent's main module where the agent's dialog moves are generated.
 module dialog_generation {
@@ -49,10 +51,13 @@ module dialog_generation {
 					updateSession(agent, repeat(SubPatternId), [], '').
 		}
 
-		% Handle instruction 'restart' (which reinitializes the agent's agenda)
-		if bel(Intent = restart, agenda(Agenda), initialAgenda(InitAgenda))
-			then delete(agenda(Agenda)) + insert(agenda(InitAgenda)) +
-				updateSession(agent, restart, [], '').
+		% Handle instruction 'restart' (which reinitializes the agent's agenda)	
+		if bel(Intent = restart) then
+			util(init([])).
+		
+		% Handle instruction 'restart' and remove the given patterns from the agenda.
+		if bel(Intent = restart(SkipPatterns)) then
+			util(init(SkipPatterns)).
 	}
 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

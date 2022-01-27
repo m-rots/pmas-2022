@@ -5,9 +5,6 @@
 	% An agenda/1 is a list of pattern names that the agent should use in that order to complete
 	% its interaction agenda with a user.
 	agenda/1,
-	% The initial agenda set at the start of a conversation is stored using the initialAgenda/1 
-	% predicate, i.e. this predicate stores a copy of the agenda at the start of a session.
-	initialAgenda/1,
 	% The session/1 history is a list of sequences. Initially this is the empty list. There are 
 	% a number of constraints on the session history:
 	% - only the sequence at the head of the list can be incomplete (but need not be);

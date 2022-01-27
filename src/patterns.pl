@@ -209,7 +209,7 @@ pattern([greeting, [agent, greeting], [user, greeting]]).
 %	the c40 pattern you introduced in step 2.
 pattern([c40lastTopicCheck, [agent, lastTopicCheck], [user, farewell], [agent, farewell]]).
 
-pattern([c40lastTopicCheck, [agent, lastTopicCheck], [user, confirmation], [agent, restart]]).
+pattern([c40lastTopicCheck, [agent, lastTopicCheck], [user, confirmation], [agent, restart([greeting])]]).
 
 pattern([c40lastTopicCheck, [agent, lastTopicCheck], [user, disconfirmation], [agent, wellWish], [user, farewell], [agent, farewell]]).
 	

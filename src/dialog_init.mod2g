@@ -6,35 +6,11 @@ use text as knowledge.
 use html as knowledge. % knowledge needed for creating window for displaying items (webpage)
 
 use dialogflow as actionspec.
+use util as module.
 
 module dialog_init {
-
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%%% Render a page with a start button on any connected browser.		%%%
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%%% Initialize dialogue parameters.									%%%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	if true then
-		% Agenda (list of patterns)
-		insert(agenda([greeting, a50recipeName, a30recipe])) +
-		% Session history (initialized to a list of one empty sequence).
-		insert(session([ [] ])) +
-		% Memory (should be initially empty but to get our given agent started it is not).
-		insert(memory([])) +
-		% Initialize missingSlots/1. See dialogue.pl for more info.
-		insert(missingSlots([])) +
-		% Initialize stepCounter/1 and totalSteps/1. See dialogue.pl for more info.
-		insert(stepCounter(-1), totalSteps(0)) +
-		insert(agentName("Handsome Squidward")) + 
-		insert(lastTopicCheck).
-
-	% Copy agenda to be able to reinitialize (restart) agenda.
-	if bel(agenda(Agenda)) then insert(initialAgenda(Agenda)).
-	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%%% Initialize behavioural parameters (to finetune agent behavior)	%%%
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	% Add here your bot name using the agentName/1 predicate.
+	if bel(true) then util(init([])).
 }
