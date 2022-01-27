@@ -48,17 +48,6 @@ docker-compose up -d
 
 This command will create and run two services in the background: Redis and Thunderstruck.
 
-You can also manually start Redis by running:
-
-```
-docker run -d -p=6379:6379 \
-    --restart=unless-stopped \
-    --name=sic \
-    redis:alpine
-```
-
-_Note: currently the Docker Compose template only starts the Redis service. Thunderstruck does not (yet) offer a Docker image._
-
 ## Future work
 
 ### Redis TLS

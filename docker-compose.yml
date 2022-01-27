@@ -4,4 +4,18 @@ services:
     image: redis:alpine
     restart: unless-stopped
     ports:
-      - "6379:6379"
+      - "127.0.0.1:6379:6379"
+
+  thunderstruck:
+    image: ghcr.io/m-rots/thunderstruck:latest
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3031:3031"
+    depends_on:
+      - redis
+    volumes:
+      - ./account.json:/data/account.json:ro
+      - ./public:/data/public:ro
+    command:
+      - "--host=0.0.0.0"
+      - "--redis-host=redis"
