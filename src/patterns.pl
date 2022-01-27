@@ -225,3 +225,9 @@ pattern([c40lastTopicCheck, [agent, lastTopicCheck], [user, disconfirmation], [a
 % 3. Add a rule in the dialog generation module in the right place to update the session by adding
 %	the c43 pattern you introduced in step 2.
 pattern([c43farewell, [agent, farewell], [user, farewell]]).
+
+/*
+Custom Patterns
+*/
+
+pattern([requestRestart, [user, requestRestart], [agent, restart]]).
